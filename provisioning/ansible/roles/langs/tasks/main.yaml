@@ -22,6 +22,20 @@
       export PATH=/home/isucon/local/go/bin:/home/isucon/go/bin:$PATH
       export GOROOT=/home/isucon/local/go
 
+- name: Install Node v14.9.0
+  become: yes
+  become_user: isucon
+  command: /tmp/xbuild/node-install v14.9.0 /home/isucon/local/node
+
+- name: Add PATH for Node
+  become: yes
+  become_user: isucon
+  blockinfile:
+    marker: "# {mark} ANSIBLE MANAGED BLOCK Node"
+    path: /home/isucon/.bashrc
+    content: |
+      export PATH=/home/isucon/local/node/bin:$PATH
+
 - name: Install python v3.8.5
   become: yes
   become_user: isucon
